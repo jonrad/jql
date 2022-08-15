@@ -1,13 +1,21 @@
 # jql
 
 ## Summary
-Simplifies writing valid jql on the command line (bash/zsh) by enabling autocomplete and validating syntax
+Makes using JQL (Jira Query Language) a better experience from the command line
+
+** Warning **
+I made this tool for myself to simplify my life. It isn't intended to be shared, but I'm keeping it public in case someone wants to be inspired. Will it work on your computer? Maybe, but maybe not.
+
+Features:
+* Outputs Jira Issues in a format that is easier to use in templates
+* Simplifies writing valid jql on the command line (bash/zsh) by enabling autocomplete and validating syntax
 
 ## Why?
 
 Are you an engineer who who has to spend a lot of time in Jira? Do you prefer using the command line over using a UI? Wouldn't it be great if you can use all the same tools you're used to (`grep` comes to mind) when finding the Jiras that are pertinent to you? You could use this [amazing jira cli](https://github.com/ankitpokhrel/jira-cli) but then you have to memorize jql and typos are a pain, especially for us developers who are so used to code completion in our IDEs. This tool will enable jql code completion within your command line so that you can better use your tools and stay away from using clunky UIs.
 
 Why waste time say lot word when few word do trick?
+
 ## Installing
 
 ```
