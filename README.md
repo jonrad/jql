@@ -3,7 +3,7 @@
 ## Summary
 Makes using JQL (Jira Query Language) a better experience from the command line
 
-** Warning **
+**Warning**
 I made this tool for myself to simplify my life. It isn't intended to be shared, but I'm keeping it public in case someone wants to be inspired. Will it work on your computer? Maybe, but maybe not.
 
 Features:
