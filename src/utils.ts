@@ -35,6 +35,10 @@ export type Thunk = (...paths: string[]) => string;
 
 const escapeCharsRegex = new RegExp(/[ \[\]]/);
 export function escapeText(tokens: string[]) {
+    if (tokens.length == 1) {
+        return tokens[0]
+    }
+
     return tokens
         .map((t) => (escapeCharsRegex.test(t) ? `"${t}"` : t))
         .join(" ");

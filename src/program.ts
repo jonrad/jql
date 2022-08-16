@@ -1,12 +1,13 @@
 import JiraApi from "jira-client";
 import * as yargs from 'yargs';
-import { default as findCacheDir } from 'find-cache-dir';
+import cachedir from 'cachedir';
 import { Suggestor } from "./suggestor";
 import { Jira } from "./jira";
 import { enableConsoleDebug, Thunk, escapeText, enableFileDebug, debug } from "./utils";
 import { completionZshTemplate, completionShTemplate } from "./templates"
 import * as path from 'path'
 import * as os from 'os';
+import { promises as fs } from 'fs'
 import prompts from 'prompts'
 import nconf from 'nconf';
 import { CacheWrapper } from "./cache-wrapper";
@@ -112,13 +113,23 @@ export class Program {
         this.printResults(async (suggestor) => await suggestor.getUsers());
     }
 
+    private async findCacheDir() {
+        const cacheDir = cachedir(this.cacheDir)
+        await fs.mkdir(cacheDir, {
+            recursive: true
+        })
+
+        return (dir) => dir ? path.join(cacheDir, dir) : cacheDir
+    }
+
     public async main() {
-        this.thunk = findCacheDir({
-            name: this.cacheDir,
-            cwd: process.argv[1],
-            create: true,
-            thunk: true,
-        });
+        const tryThunk = await this.findCacheDir()
+
+        if (!tryThunk) {
+            throw Error("Could not get cache dir")
+        }
+
+        this.thunk = tryThunk;
 
         nconf
             .env({
