@@ -1,6 +1,6 @@
 {
   "name": "@yonrad/jql",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "main": "program.ts",
   "bin": {
     "jql": "lib/cli.js"
