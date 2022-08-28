@@ -19,7 +19,7 @@ Why waste time say lot word when few word do trick?
 ## Installing
 
 ```
-npm install -g @jonrad/jql
+npm install -g @yonrad/jql
 
 # Add the following to your bashrc or zshrc (or run from command line to test as a one off)
 source <(jql completion)
@@ -35,9 +35,55 @@ jql config # then follow prompts
 
 ```
 # The following will give you valid syntax to provide to anything that requires jql
-jql assi<tab> = Jon<tab><enter>
+jql assi<tab> = Jon<tab>
 # Output:
-# assignee = "Jon Radchenko"
+# jql assignee = "Jon Radchenko"
+```
+
+### Example 1
+```
+jql --query assignedRecently assignee = Jon\ Radchenko and updatedDate \> -14d | head
+```
+
+Output:
+```
+{
+  "assignedRecently": {
+    "total": 34,
+    // snip
+    "issues": [
+      {
+        "fields": {
+            // snip
+            "myCustomField": "Foo"
+        }
+      },
+      {
+        // snip
+      }
+    ]
+  }
+}
+```
+
+### Example 2
+```
+jql --query assignedRecently 'assignee = "Jon Radchenko" and "updatedDate > -14d"'
+# Output the same as above
+```
+
+### Example 3
+```
+jql --query assignedRecently 'assignee = "Jon Radchenko" and "updatedDate > -14d"' \
+    --query anotherQuery 'assignee = "Someone Else" and "updatedDate > -14d"'
+```
+
+Output
+```
+{
+  "assignedRecently": { ... },
+  "anotherQuery": { ... }
+}
 ```
 
 ## Using with [jira-cli](https://github.com/ankitpokhrel/jira-cli)
